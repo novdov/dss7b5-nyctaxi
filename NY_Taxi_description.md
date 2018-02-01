@@ -6,13 +6,7 @@
 
 **평가 Metric - RMSLE (Root Mean Squared Logarithmic Error, 평균제곱급 오차)**
 
-$$\epsilon = \sqrt{\frac{1}{n} \sum_{i=1}^n (\log(p_i + 1) - \log(a_i+1))^2 }\ $$
-
-$ϵ$ is the RMSLE value (score)
-$n$ is the total number of observations in the (public/private) data set,
-$p_i$ is your prediction of trip duration, and
-$a_i$ is the actual trip duration for $i$ 
-$log(x)$  is the natural logarithm of $x$
+![CodeCogsEqn](/Users/sunwoongkim/Downloads/CodeCogsEqn.gif)
 
 
 
