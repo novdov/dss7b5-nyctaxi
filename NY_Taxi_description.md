@@ -35,7 +35,7 @@ etc.
 
 **Data fields**
 
-- id : 각 운행에 대한 고유 아이디
+- **id** : 각 운행에 대한 고유 아이디
 - **vendor_id** - 각 운행에 대한 서비스 제공자
 - **pickup_datetime** - 탑승 날짜/시간
 - **dropoff_datetime** - 하차 날짜/시간
