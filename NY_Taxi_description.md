@@ -1,5 +1,7 @@
 ## New York City Taxi Trip Duration 간략 설명
 
+https://www.kaggle.com/c/nyc-taxi-trip-duration
+
 **목표**
 
 뉴욕 내 택시 총 운행 지속시간을 예측하는 모델 구현
