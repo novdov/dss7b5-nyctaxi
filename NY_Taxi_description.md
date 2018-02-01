@@ -6,8 +6,6 @@
 
 **평가 Metric - RMSLE (Root Mean Squared Logarithmic Error, 평균제곱급 오차)**
 
-![CodeCogsEqn](/Users/sunwoongkim/Downloads/CodeCogsEqn.gif)
-
 
 
 **제출 파일**
