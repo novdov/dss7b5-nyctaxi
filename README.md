@@ -1,2 +1,2 @@
 # dss7b5-nytaxi
-DSS 7B 5 - Regression TP - New York City Taxi Trip Duration
+DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
