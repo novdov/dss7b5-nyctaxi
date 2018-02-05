@@ -39,7 +39,7 @@ etc.
 - **vendor_id** - 각 운행에 대한 서비스 제공자
 - **pickup_datetime** - 탑승 날짜/시간
 - **dropoff_datetime** - 하차 날짜/시간
-- **passenger_count** - 탑승 승객 수 (기사 포함)
+- **passenger_count** - 탑승 승객 수
 - **pickup_longitude** - 탑승 경도
 - **pickup_latitude** - 탑승 위도
 - **dropoff_longitude** - 하차 경도
