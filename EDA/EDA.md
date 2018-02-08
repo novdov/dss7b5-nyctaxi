@@ -10,6 +10,9 @@ pickup_datetime을 년도, 월, 요일 등으로 나눴어요.
 세부적인 관계는 오늘 저녁이나 내일 더 알아볼예정입니다.
 일단은 년도, 월, 요일, 시간 외에 또 pickup_datetime에서 따올 data가 뭐가 있을지 더 생각나는거 있으시면 알려주세요!
 
+- 2018.02.08 -
+test data의 EDA내용 시각화한 버전으로 commit했고, train data도 어떤 데이터가 있는지 정도만 EDA했어요.
+
 
 <장승우>
 시간, 거리 제외하니까 남는 변수가 승차객수(passenger count)인데
