@@ -13,4 +13,5 @@ pickup_hour
 
 vendor_id
 store_and_fwd_flag
+
 [실수 + 카테고리]
