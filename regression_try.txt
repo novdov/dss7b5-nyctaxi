@@ -1,0 +1,16 @@
+김선웅
+
+[실수 only]
+passenger_count
+distance
+speed
+pickup_hour(시간을 실수로 보고 한번 시도해봄)
+
+[카테고리 only]
+pickup_month
+pickup_weekday
+pickup_hour
+
+vendor_id
+store_and_fwd_flag
+[실수 + 카테고리]
