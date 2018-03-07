@@ -4,9 +4,8 @@
 
 #####실수 only
 
-1) passenger_count
-2) distance
-3) avg_speed_h
+1) distance
+2) avg_speed_h
 
 - **시간 데이터 실수로 반영**
 
@@ -22,15 +21,16 @@
 1) pickup_month
 2) pickup_weekday
 3) pickup_hour
-4) vendor_id
-5) store_and_fwd_flag
-
+4) vendor_id -> 0.000
+5) store_and_fwd_flag -> 0.000
+6)passenger_count -> 0.000 (trip duration, distance, month, hour),
+                     0.001 (weekday)
 #####실수 + 카테고리
 
 1) R + pickup_hour —> 0.015
 2) R + pickup_weekday —> 0.015
 3) R + pickup_month —> 0.014
-4) R + pickup_hour + pickup_weekday —> 0.015\
+4) R + pickup_hour + pickup_weekday —> 0.015
 5) R + pickup_hour + pickup_month —> 0.015
 6) R + pickup_weekday + pickup_month —> 0.015
 7) R + pickup_hour + pickup+weekday + pickup_month —> 0.015
