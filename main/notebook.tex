@@ -1,0 +1,2062 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{main\_0314}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{regression-team-project}{%
+\section{Regression Team Project}\label{regression-team-project}}
+
+\textbf{Fast Campus Data Science School 7th}
+
+\hypertarget{overview}{%
+\subsection{Overview}\label{overview}}
+
+\begin{itemize}
+\tightlist
+\item
+  Team: Team B-5 committer (김선웅, 이영인, 장승우)
+\item
+  Subject: New York City Taxi Trip Duration
+\item
+  Dataset: 2016 NYC Cab trip record data (by TLC)
+\item
+  Objective: Building a model that predicts the duration of each trip in
+  New York City.
+\end{itemize}
+
+\hypertarget{data-fields}{%
+\subsection{Data fields}\label{data-fields}}
+
+\begin{itemize}
+\tightlist
+\item
+  id - 각 운행별 고유 id
+\item
+  vendor\_id - 운행별 각 택시 회사의 id
+\item
+  pickup\_datetime - 승차 날짜/시각 (미터기 기록 시작)
+\item
+  dropoff\_datetime - 하차 날짜/시각 (미터기 기록 종료)
+\item
+  passenger\_count - 승객 수
+\item
+  pickup\_longitude - 승차 위도
+\item
+  pickup\_latitude - 승차 경도
+\item
+  dropoff\_longitude - 하차 위도
+\item
+  dropoff\_latitude - 하차 경도
+\item
+  store\_and\_fwd\_flag - 운행 기록 서비 전송 전 차량 메모리 저장 여부
+  (Y: 저장/전송, N: 미저장/전송)
+\item
+  trip\_duration - 운행 소요 시간 (초)
+\end{itemize}
+
+    \hypertarget{index}{%
+\subsection{Index}\label{index}}
+
+\hypertarget{uxb370uxc774uxd130-uxd0d0uxc0c9-uxbc0f-uxc804uxcc98uxb9ac}{%
+\subsubsection{1. 데이터 탐색 및
+전처리}\label{uxb370uxc774uxd130-uxd0d0uxc0c9-uxbc0f-uxc804uxcc98uxb9ac}}
+
+\begin{itemize}
+\tightlist
+\item
+  Train/Test Data 탐색
+\item
+  변수 기초 전처리
+\end{itemize}
+
+\hypertarget{modeling}{%
+\subsubsection{2. Modeling}\label{modeling}}
+
+\begin{itemize}
+\item
+  변수 시각화
+\item
+  상관관계
+\item
+  변수 중요도/영향 파악
+\item
+  변수 조정
+\item
+  다항회귀
+\item
+  결과 진단
+\item
+  Leverage \& Outlier
+\item
+  Hyperparameter tuning
+\end{itemize}
+
+\hypertarget{cross-validation}{%
+\subsubsection{7. Cross Validation}\label{cross-validation}}
+
+    \hypertarget{uxb370uxc774uxd130-uxd0d0uxc0c9-uxbc0f-uxc804uxcc98uxb9ac}{%
+\subsection{1. 데이터 탐색 및
+전처리}\label{uxb370uxc774uxd130-uxd0d0uxc0c9-uxbc0f-uxc804uxcc98uxb9ac}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{datetime} \PY{k}{as} \PY{n+nn}{dt}
+         \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{sp}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{formula}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{smf}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sms} 
+         \PY{k+kn}{import} \PY{n+nn}{sklearn} \PY{k}{as} \PY{n+nn}{sk}
+         
+         \PY{k+kn}{from} \PY{n+nn}{patsy} \PY{k}{import} \PY{n}{dmatrices}
+         
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+         
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.figure\PYZus{}formats = \PYZob{}\PYZsq{}png\PYZsq{}, \PYZsq{}retina\PYZsq{}\PYZcb{}
+         
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{font\PYZus{}manager}\PY{p}{,} \PY{n}{rc}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{axes.unicode\PYZus{}minus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{k+kc}{False}
+         
+         \PY{k+kn}{import} \PY{n+nn}{platform}
+         \PY{k}{if} \PY{n}{platform}\PY{o}{.}\PY{n}{system}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Darwin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+             \PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{family}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AppleGothic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{elif} \PY{n}{platform}\PY{o}{.}\PY{n}{system}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Windows}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+             \PY{n}{path} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c:/Windows/Fonts/malgun.ttf}\PY{l+s+s2}{\PYZdq{}}
+             \PY{n}{font\PYZus{}name} \PY{o}{=} \PY{n}{font\PYZus{}manager}\PY{o}{.}\PY{n}{FontProperties}\PY{p}{(}\PY{n}{fname}\PY{o}{=}\PY{n}{path}\PY{p}{)}\PY{o}{.}\PY{n}{get\PYZus{}name}\PY{p}{(}\PY{p}{)}
+             \PY{n}{rc}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{family}\PY{o}{=}\PY{n}{font\PYZus{}name}\PY{p}{)}
+         
+         \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{train-test-data-uxae30uxbcf8-uxd0d0uxc0c9}{%
+\subsubsection{1-1. train \& test data 기본
+탐색}\label{train-test-data-uxae30uxbcf8-uxd0d0uxc0c9}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../../dataset/train.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of Train Data: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of Train Data:  (1458644, 11)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../../dataset/test.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{parse\PYZus{}dates}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of Test Data: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of Test Data:  (625134, 9)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{train}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1458644 entries, 0 to 1458643
+Data columns (total 11 columns):
+id                    1458644 non-null object
+vendor\_id             1458644 non-null int64
+pickup\_datetime       1458644 non-null datetime64[ns]
+dropoff\_datetime      1458644 non-null datetime64[ns]
+passenger\_count       1458644 non-null int64
+pickup\_longitude      1458644 non-null float64
+pickup\_latitude       1458644 non-null float64
+dropoff\_longitude     1458644 non-null float64
+dropoff\_latitude      1458644 non-null float64
+store\_and\_fwd\_flag    1458644 non-null object
+trip\_duration         1458644 non-null int64
+dtypes: datetime64[ns](2), float64(4), int64(3), object(2)
+memory usage: 122.4+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{test}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 625134 entries, 0 to 625133
+Data columns (total 9 columns):
+id                    625134 non-null object
+vendor\_id             625134 non-null int64
+pickup\_datetime       625134 non-null datetime64[ns]
+passenger\_count       625134 non-null int64
+pickup\_longitude      625134 non-null float64
+pickup\_latitude       625134 non-null float64
+dropoff\_longitude     625134 non-null float64
+dropoff\_latitude      625134 non-null float64
+store\_and\_fwd\_flag    625134 non-null object
+dtypes: datetime64[ns](1), float64(4), int64(2), object(2)
+memory usage: 42.9+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{k}{if} \PY{n}{col} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number of unique values of }\PY{l+s+si}{\PYZob{}col\PYZcb{}}\PY{l+s+s2}{: }\PY{l+s+si}{\PYZob{}num\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{col}\PY{o}{=}\PY{n}{col}\PY{p}{,} \PY{n}{num}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The number of unique values of vendor\_id: 2
+The number of unique values of pickup\_datetime: 1380222
+The number of unique values of dropoff\_datetime: 1380377
+The number of unique values of passenger\_count: 10
+The number of unique values of pickup\_longitude: 23047
+The number of unique values of pickup\_latitude: 45245
+The number of unique values of dropoff\_longitude: 33821
+The number of unique values of dropoff\_latitude: 62519
+The number of unique values of store\_and\_fwd\_flag: 2
+The number of unique values of trip\_duration: 7417
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Features only in training data:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{set}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{set}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Features only in training data: \{'dropoff\_datetime', 'trip\_duration'\}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{train}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}                 id  vendor\_id     pickup\_datetime    dropoff\_datetime  \textbackslash{}
+        1458639  id2376096          2 2016-04-08 13:31:04 2016-04-08 13:44:02   
+        1458640  id1049543          1 2016-01-10 07:35:15 2016-01-10 07:46:10   
+        1458641  id2304944          2 2016-04-22 06:57:41 2016-04-22 07:10:25   
+        1458642  id2714485          1 2016-01-05 15:56:26 2016-01-05 16:02:39   
+        1458643  id1209952          1 2016-04-05 14:44:25 2016-04-05 14:47:43   
+        
+                 passenger\_count  pickup\_longitude  pickup\_latitude  \textbackslash{}
+        1458639                4        -73.982201        40.745522   
+        1458640                1        -74.000946        40.747379   
+        1458641                1        -73.959129        40.768799   
+        1458642                1        -73.982079        40.749062   
+        1458643                1        -73.979538        40.781750   
+        
+                 dropoff\_longitude  dropoff\_latitude store\_and\_fwd\_flag  trip\_duration  
+        1458639         -73.994911         40.740170                  N            778  
+        1458640         -73.970184         40.796547                  N            655  
+        1458641         -74.004433         40.707371                  N            764  
+        1458642         -73.974632         40.757107                  N            373  
+        1458643         -73.972809         40.790585                  N            198  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{train}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}          vendor\_id  passenger\_count  pickup\_longitude  pickup\_latitude  \textbackslash{}
+        count  1458644.000      1458644.000       1458644.000      1458644.000   
+        mean         1.535            1.665           -73.973           40.751   
+        std          0.499            1.314             0.071            0.033   
+        min          1.000            0.000          -121.933           34.360   
+        25\%          1.000            1.000           -73.992           40.737   
+        50\%          2.000            1.000           -73.982           40.754   
+        75\%          2.000            2.000           -73.967           40.768   
+        max          2.000            9.000           -61.336           51.881   
+        
+               dropoff\_longitude  dropoff\_latitude  trip\_duration  
+        count        1458644.000       1458644.000    1458644.000  
+        mean             -73.973            40.752        959.492  
+        std                0.071             0.036       5237.432  
+        min             -121.933            32.181          1.000  
+        25\%              -73.991            40.736        397.000  
+        50\%              -73.980            40.755        662.000  
+        75\%              -73.963            40.770       1075.000  
+        max              -61.336            43.921    3526282.000  
+\end{Verbatim}
+            
+    \hypertarget{uxb370uxc774uxd130-uxae30uxcd08-uxd0d0uxc0c9-uxacb0uxacfc}{%
+\subsubsection{{[}데이터 기초 탐색
+결과{]}}\label{uxb370uxc774uxd130-uxae30uxcd08-uxd0d0uxc0c9-uxacb0uxacfc}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  vendor는 두 곳
+\item
+  승객 수는 0명부터 9명
+\item
+  승차 위치와 하차 위치는 크게 다르지 않아 보임
+\item
+  store and fwd flag의 데이터는 N/Y로 표현되어 binarize 필요해 보임
+\item
+  trip duration의 경우 최댓값이 평균에 비해 아주 크며, 최솟값과
+  최댓값간의 차이 또한 매우 큼
+\end{enumerate}
+
+    \hypertarget{uxb370uxc774uxd130-uxc804uxcc98uxb9ac}{%
+\subsubsection{1-2. 데이터
+전처리}\label{uxb370uxc774uxd130-uxc804uxcc98uxb9ac}}
+
+    \hypertarget{datetime}{%
+\subsubsection{datetime}\label{datetime}}
+
+\begin{itemize}
+\tightlist
+\item
+  datetime parsing
+
+  \begin{itemize}
+  \tightlist
+  \item
+    month
+  \item
+    weekday
+  \item
+    hour
+  \end{itemize}
+\item
+  working day 카테고리 생성
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{month}
+         \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{weekday}
+         \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{hour}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{working\PYZus{}day} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]} \PY{c+c1}{\PYZsh{} Mon\PYZhy{}Fri}
+         \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{n}{working\PYZus{}day}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{store_and_fwd_flag}{%
+\subsubsection{store\_and\_fwd\_flag}\label{store_and_fwd_flag}}
+
+\begin{itemize}
+\tightlist
+\item
+  binarize를 통해 문자열 labeling
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}and\PYZus{}fwd\PYZus{}flag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{*} \PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{store\PYZus{}and\PYZus{}fwd\PYZus{}flag}\PY{o}{.}\PY{n}{values} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{uxc88cuxd45c-uxb370uxc774uxd130-pickup_latitudepickup_longitude-dropoff_latitudedropoff_longitude}{%
+\subsubsection{좌표 데이터 (pickup\_latitude/pickup\_longitude,
+dropoff\_latitude/dropoff\_longitude)}\label{uxc88cuxd45c-uxb370uxc774uxd130-pickup_latitudepickup_longitude-dropoff_latitudedropoff_longitude}}
+
+\begin{itemize}
+\tightlist
+\item
+  distance (haversine distance) 계산
+\item
+  bearing (direction) 계산
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2} \PY{o}{=} \PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pickup\PYZus{}latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pickup\PYZus{}longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} 
+                                   \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dropoff\PYZus{}latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dropoff\PYZus{}longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  haversine distance 계산
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{haversine\PYZus{}array}\PY{p}{(}\PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{radians}\PY{p}{,} \PY{p}{(}\PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{AVG\PYZus{}EARTH\PYZus{}RADIUS} \PY{o}{=} \PY{l+m+mi}{6371}  \PY{c+c1}{\PYZsh{} in km}
+             \PY{n}{lat} \PY{o}{=} \PY{n}{lat2} \PY{o}{\PYZhy{}} \PY{n}{lat1}
+             \PY{n}{lng} \PY{o}{=} \PY{n}{lng2} \PY{o}{\PYZhy{}} \PY{n}{lng1}
+             \PY{n}{d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{lat} \PY{o}{*} \PY{l+m+mf}{0.5}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{lat1}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{lat2}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{lng} \PY{o}{*} \PY{l+m+mf}{0.5}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}
+             \PY{n}{h} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{AVG\PYZus{}EARTH\PYZus{}RADIUS} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{arcsin}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{h}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  bearing (direction 계산)
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{bearing\PYZus{}array}\PY{p}{(}\PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{lng\PYZus{}delta\PYZus{}rad} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{lng2} \PY{o}{\PYZhy{}} \PY{n}{lng1}\PY{p}{)}
+             \PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{radians}\PY{p}{,} \PY{p}{(}\PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2}\PY{p}{)}\PY{p}{)}
+             \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{lng\PYZus{}delta\PYZus{}rad}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{lat2}\PY{p}{)}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{lat1}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{lat2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{lat1}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{lat2}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{lng\PYZus{}delta\PYZus{}rad}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{degrees}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arctan2}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{360}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{l+m+mi}{360} \PY{c+c1}{\PYZsh{} from \PYZhy{}180/180 to 0/360}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{distance} \PY{o}{=} \PY{n}{haversine\PYZus{}array}\PY{p}{(}\PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{bearing} \PY{o}{=} \PY{n}{bearing\PYZus{}array}\PY{p}{(}\PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{uxc804uxcc98uxb9ac-uxd6c4-uxcd94uxac00uxb41c-uxbcc0uxc218}{%
+\subsubsection{전처리 후 추가된
+변수}\label{uxc804uxcc98uxb9ac-uxd6c4-uxcd94uxac00uxb41c-uxbcc0uxc218}}
+
+\begin{itemize}
+\tightlist
+\item
+  시간
+
+  \begin{itemize}
+  \tightlist
+  \item
+    pickup\_month
+  \item
+    pickup\_weekday
+  \item
+    pickup\_hour
+  \item
+    working\_day (categorical variable)
+  \end{itemize}
+\item
+  위치
+
+  \begin{itemize}
+  \tightlist
+  \item
+    distance
+  \item
+    bearing
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{train}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 1458644 entries, 0 to 1458643
+Data columns (total 17 columns):
+id                    1458644 non-null object
+vendor\_id             1458644 non-null int64
+pickup\_datetime       1458644 non-null datetime64[ns]
+dropoff\_datetime      1458644 non-null datetime64[ns]
+passenger\_count       1458644 non-null int64
+pickup\_longitude      1458644 non-null float64
+pickup\_latitude       1458644 non-null float64
+dropoff\_longitude     1458644 non-null float64
+dropoff\_latitude      1458644 non-null float64
+store\_and\_fwd\_flag    1458644 non-null int64
+trip\_duration         1458644 non-null int64
+pickup\_month          1458644 non-null int64
+pickup\_weekday        1458644 non-null int64
+pickup\_hour           1458644 non-null int64
+working\_day           1458644 non-null int64
+distance              1458644 non-null float64
+bearing               1458644 non-null float64
+dtypes: datetime64[ns](2), float64(6), int64(8), object(1)
+memory usage: 189.2+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+             \PY{k}{if} \PY{n}{col} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The number of unique values of }\PY{l+s+si}{\PYZob{}col\PYZcb{}}\PY{l+s+s2}{: }\PY{l+s+si}{\PYZob{}num\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{col}\PY{o}{=}\PY{n}{col}\PY{p}{,} \PY{n}{num}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1458644, 17)
+
+The number of unique values of vendor\_id: 2
+The number of unique values of pickup\_datetime: 1380222
+The number of unique values of dropoff\_datetime: 1380377
+The number of unique values of passenger\_count: 10
+The number of unique values of pickup\_longitude: 23047
+The number of unique values of pickup\_latitude: 45245
+The number of unique values of dropoff\_longitude: 33821
+The number of unique values of dropoff\_latitude: 62519
+The number of unique values of store\_and\_fwd\_flag: 2
+The number of unique values of trip\_duration: 7417
+The number of unique values of pickup\_month: 6
+The number of unique values of pickup\_weekday: 7
+The number of unique values of pickup\_hour: 24
+The number of unique values of working\_day: 2
+The number of unique values of distance: 1452285
+The number of unique values of bearing: 1452020
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{train}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:}                 id  vendor\_id     pickup\_datetime    dropoff\_datetime  \textbackslash{}
+         1458639  id2376096          2 2016-04-08 13:31:04 2016-04-08 13:44:02   
+         1458640  id1049543          1 2016-01-10 07:35:15 2016-01-10 07:46:10   
+         1458641  id2304944          2 2016-04-22 06:57:41 2016-04-22 07:10:25   
+         1458642  id2714485          1 2016-01-05 15:56:26 2016-01-05 16:02:39   
+         1458643  id1209952          1 2016-04-05 14:44:25 2016-04-05 14:47:43   
+         
+                  passenger\_count  pickup\_longitude  pickup\_latitude  \textbackslash{}
+         1458639                4        -73.982201        40.745522   
+         1458640                1        -74.000946        40.747379   
+         1458641                1        -73.959129        40.768799   
+         1458642                1        -73.982079        40.749062   
+         1458643                1        -73.979538        40.781750   
+         
+                  dropoff\_longitude  dropoff\_latitude  store\_and\_fwd\_flag  \textbackslash{}
+         1458639         -73.994911         40.740170                   0   
+         1458640         -73.970184         40.796547                   0   
+         1458641         -74.004433         40.707371                   0   
+         1458642         -73.974632         40.757107                   0   
+         1458643         -73.972809         40.790585                   0   
+         
+                  trip\_duration  pickup\_month  pickup\_weekday  pickup\_hour  \textbackslash{}
+         1458639            778             4               4           13   
+         1458640            655             1               6            7   
+         1458641            764             4               4            6   
+         1458642            373             1               1           15   
+         1458643            198             4               1           14   
+         
+                  working\_day  distance     bearing  
+         1458639            1  1.225080  240.940662  
+         1458640            0  6.049836   25.342196  
+         1458641            1  7.824606  209.211508  
+         1458642            1  1.092564   35.033294  
+         1458643            1  1.134042   29.969486  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{train}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}          vendor\_id  passenger\_count  pickup\_longitude  pickup\_latitude  \textbackslash{}
+         count  1458644.000      1458644.000       1458644.000      1458644.000   
+         mean         1.535            1.665           -73.973           40.751   
+         std          0.499            1.314             0.071            0.033   
+         min          1.000            0.000          -121.933           34.360   
+         25\%          1.000            1.000           -73.992           40.737   
+         50\%          2.000            1.000           -73.982           40.754   
+         75\%          2.000            2.000           -73.967           40.768   
+         max          2.000            9.000           -61.336           51.881   
+         
+                dropoff\_longitude  dropoff\_latitude  store\_and\_fwd\_flag  trip\_duration  \textbackslash{}
+         count        1458644.000       1458644.000         1458644.000    1458644.000   
+         mean             -73.973            40.752               0.006        959.492   
+         std                0.071             0.036               0.074       5237.432   
+         min             -121.933            32.181               0.000          1.000   
+         25\%              -73.991            40.736               0.000        397.000   
+         50\%              -73.980            40.755               0.000        662.000   
+         75\%              -73.963            40.770               0.000       1075.000   
+         max              -61.336            43.921               1.000    3526282.000   
+         
+                pickup\_month  pickup\_weekday  pickup\_hour  working\_day     distance  \textbackslash{}
+         count   1458644.000     1458644.000  1458644.000  1458644.000  1458644.000   
+         mean          3.517           3.050       13.606        0.715        3.441   
+         std           1.681           1.954        6.400        0.452        4.297   
+         min           1.000           0.000        0.000        0.000        0.000   
+         25\%           2.000           1.000        9.000        0.000        1.232   
+         50\%           4.000           3.000       14.000        1.000        2.094   
+         75\%           5.000           5.000       19.000        1.000        3.875   
+         max           6.000           6.000       23.000        1.000     1240.909   
+         
+                    bearing  
+         count  1458644.000  
+         mean       153.406  
+         std        104.220  
+         min          0.000  
+         25\%         44.305  
+         50\%        168.517  
+         75\%        224.361  
+         max        359.993  
+\end{Verbatim}
+            
+    \hypertarget{uxbcc0uxc218-uxd0d0uxc0c9-uxbc0f-uxc120uxd0dd}{%
+\subsubsection{2. 변수 탐색 및
+선택}\label{uxbcc0uxc218-uxd0d0uxc0c9-uxbc0f-uxc120uxd0dd}}
+
+\hypertarget{uxbcc0uxc218-uxc2dcuxac01uxd654}{%
+\subsubsection{2-1 변수 시각화}\label{uxbcc0uxc218-uxc2dcuxac01uxd654}}
+
+    \hypertarget{trip_durationuxc758-uxbd84uxd3ec}{%
+\subsubsection{trip\_duration의
+분포}\label{trip_durationuxc758-uxbd84uxd3ec}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution of Trip Duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{122}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dashed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1500000}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:}                id  vendor\_id     pickup\_datetime    dropoff\_datetime  \textbackslash{}
+         355003  id1864733          1 2016-01-05 00:19:42 2016-01-27 11:08:38   
+         680594  id0369307          1 2016-02-13 22:38:00 2016-03-08 15:57:38   
+         924150  id1325766          1 2016-01-05 06:14:15 2016-01-31 01:01:07   
+         978383  id0053347          1 2016-02-13 22:46:52 2016-03-25 18:18:14   
+         
+                 passenger\_count  pickup\_longitude  pickup\_latitude  dropoff\_longitude  \textbackslash{}
+         355003                1        -73.789650        40.643559         -73.956810   
+         680594                2        -73.921677        40.735252         -73.984749   
+         924150                1        -73.983788        40.742325         -73.985489   
+         978383                1        -73.783905        40.648632         -73.978271   
+         
+                 dropoff\_latitude  store\_and\_fwd\_flag  trip\_duration  pickup\_month  \textbackslash{}
+         355003         40.773087                   0        1939736             1   
+         680594         40.759979                   0        2049578             2   
+         924150         40.727676                   0        2227612             1   
+         978383         40.750202                   0        3526282             2   
+         
+                 pickup\_weekday  pickup\_hour  working\_day   distance     bearing  
+         355003               1            0            1  20.148664  315.683698  
+         680594               5           22            0   5.982487  297.381354  
+         924150               1            6            1   1.635128  185.030076  
+         978383               5           22            0  19.900661  304.641003  
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{500시간이 넘는 데이터 존재: 잘못 입력된 데이터로 보임
+  --\textgreater{} 제거}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1500000}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log1p}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{fit}\PY{o}{=}\PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Log of trip duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{uxc885uxc18duxbcc0uxc218uxb3c5uxb9bduxbcc0uxc218-uxbd84uxb9ac-uxd6c4-pairplot}{%
+\subsubsection{종속변수/독립변수 분리 후
+pairplot}\label{uxc885uxc18duxbcc0uxc218uxb3c5uxb9bduxbcc0uxc218-uxbd84uxb9ac-uxd6c4-pairplot}}
+
+\begin{itemize}
+\tightlist
+\item
+  실수 변수
+\item
+  카테고리 변수
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{X\PYZus{}cols} \PY{o}{=} \PY{p}{[}\PY{n}{col} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{columns} \PY{k}{if} \PY{n}{col} \PY{o}{!=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{train\PYZus{}X0} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{X\PYZus{}cols}\PY{p}{]}
+         \PY{n}{train\PYZus{}y} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{col\PYZus{}real} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{passenger\PYZus{}count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{distance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bearing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{col\PYZus{}cats} \PY{o}{=} \PY{p}{[}\PY{n}{col} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{columns} \PY{k}{if} \PY{n}{col} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{col\PYZus{}real}\PY{p}{]}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n}{col\PYZus{}cats}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+         \PY{n}{col\PYZus{}cats\PYZus{}nontime} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vendor\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}and\PYZus{}fwd\PYZus{}flag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{trip_duration-uxc2e4uxc218-uxbcc0uxc218-pairplot}{%
+\subsubsection{trip\_duration \textasciitilde{} 실수 변수
+pairplot}\label{trip_duration-uxc2e4uxc218-uxbcc0uxc218-pairplot}}
+
+\begin{itemize}
+\tightlist
+\item
+  trip\_duration
+\item
+  passenger\_count
+\item
+  distance
+\item
+  bearing
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{train\PYZus{}X0}\PY{p}{[}\PY{n}{col\PYZus{}real}\PY{p}{]}\PY{p}{,} \PY{n}{train\PYZus{}y}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{1000}\PY{p}{]}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mf}{3.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{uxce74uxd14cuxace0uxb9ac-uxbcc0uxc218-boxplot}{%
+\subsubsection{카테고리 변수
+boxplot}\label{uxce74uxd14cuxace0uxb9ac-uxbcc0uxc218-boxplot}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{f}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{nrows}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vendor\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}and\PYZus{}fwd\PYZus{}flag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  pairplot과 boxplot을 통해 확인할 수 있는 이상치: 80000 이상의
+  trip\_duration
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The Number of trips almost 24 hours:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{80000}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The Number of trips almost 24 hours: 1895
+
+    \end{Verbatim}
+
+    \hypertarget{uxc704uxce58-uxbcc0uxc218uxc758-uxbd84uxd3ec}{%
+\subsubsection{위치 변수의
+분포}\label{uxc704uxce58-uxbcc0uxc218uxc758-uxbd84uxd3ec}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{221}\PY{p}{)}\PY{p}{;} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{222}\PY{p}{)}\PY{p}{;} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{223}\PY{p}{)}\PY{p}{;} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{)}\PY{p}{;} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{NYC 경계 (google maps를 통해 확인):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    latitude: 약 40.5 \textasciitilde{} 40.90
+  \item
+    longitude: 약 -74.24 \textasciitilde{} -73.70
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{weird\PYZus{}p} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{45}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}
+         \PY{n}{weird\PYZus{}d} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{36}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}}\PY{l+m+mi}{120}\PY{p}{)}\PY{p}{]}
+         
+         \PY{k+kn}{import} \PY{n+nn}{folium}
+         \PY{n}{map\PYZus{}weird} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{38.720716}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{100.721951}\PY{p}{]}\PY{p}{,} \PY{n}{tiles}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OpenStreetMap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{weird\PYZus{}p}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{folium}\PY{o}{.}\PY{n}{CircleMarker}\PY{p}{(}\PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                                 \PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}weird}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{idx}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{weird\PYZus{}d}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:} 
+             \PY{n}{folium}\PY{o}{.}\PY{n}{CircleMarker}\PY{p}{(}\PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} 
+                                 \PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}weird}\PY{p}{)}
+         \PY{n}{map\PYZus{}weird}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} <folium.folium.Map at 0x1c1a4cbd30>
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{대서양, 미국 서부, 캐나다의 좌표가 입력되어 있음}
+\end{itemize}
+f, (ax1, ax2) = plt.subplots(1, 2, sharey=True, figsize=(13,8))
+
+train.plot(kind="scatter", x="pickup_longitude", y="pickup_latitude",
+           color="yellow", grid=False, s=.02, alpha=.6, subplots=True, ax=ax1)
+
+ax1.set_title("Pickups")
+ax1.set_facecolor("black")
+
+train.plot(kind="scatter", x="dropoff_longitude", y="dropoff_latitude", 
+           color="yellow", grid=False, s=.02, alpha=.6, subplots=True, ax=ax2)
+
+ax2.set_title("Dropoffs")
+ax2.set_facecolor("black") 
+    \hypertarget{nyc-uxb0b4uxc758-uxc2b9uxd558uxcc28-uxbd84uxd3ec-uxd30cuxc545}{%
+\subsubsection{NYC 내의 승하차 분포
+파악}\label{nyc-uxb0b4uxc758-uxc2b9uxd558uxcc28-uxbd84uxd3ec-uxd30cuxc545}}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} folium 코드}
+         
+         \PY{c+c1}{\PYZsh{} map\PYZus{}nyc = folium.Map(location=[40.767937, \PYZhy{}73.982155], tiles=\PYZsq{}OpenStreetMap\PYZsq{}, zoom\PYZus{}start=11)}
+         \PY{c+c1}{\PYZsh{} for idx, row in train[::7000].iterrows():}
+         \PY{c+c1}{\PYZsh{}     if pd.notnull(row[\PYZdq{}pickup\PYZus{}latitude\PYZdq{}]):}
+         \PY{c+c1}{\PYZsh{}         folium.CircleMarker([row[\PYZdq{}pickup\PYZus{}latitude\PYZdq{}], row[\PYZdq{}pickup\PYZus{}longitude\PYZdq{}]], }
+         \PY{c+c1}{\PYZsh{}                             radius=3, color=\PYZdq{}red\PYZdq{}, fill=True, fill\PYZus{}color=\PYZdq{}red\PYZdq{}).add\PYZus{}to(map\PYZus{}nyc)        }
+         \PY{c+c1}{\PYZsh{}         folium.CircleMarker([row[\PYZdq{}dropoff\PYZus{}latitude\PYZdq{}], row[\PYZdq{}dropoff\PYZus{}longitude\PYZdq{}]], }
+         \PY{c+c1}{\PYZsh{}                             radius=3, color=\PYZdq{}blue\PYZdq{}, fill=True, fill\PYZus{}color=\PYZdq{}blue\PYZdq{}).add\PYZus{}to(map\PYZus{}nyc)       }
+         \PY{c+c1}{\PYZsh{} map\PYZus{}nyc}
+\end{Verbatim}
+
+
+    \hypertarget{uxc2dcuxac04-uxbcc0uxc218-plot}{%
+\subsubsection{시간 변수 plot}\label{uxc2dcuxac04-uxbcc0uxc218-plot}}
+
+    \hypertarget{trip_duration-pickup_hour-with-pickup_weekday}{%
+\subsubsection{trip\_duration \textasciitilde{} pickup\_hour with
+pickup\_weekday}\label{trip_duration-pickup_hour-with-pickup_weekday}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{summary\PYZus{}hour\PYZus{}duration} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{summary\PYZus{}hour\PYZus{}duration}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{summary\PYZus{}hour\PYZus{}duration}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{unit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{tsplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{summary\PYZus{}hour\PYZus{}duration}\PY{p}{,} \PY{n}{time}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                    \PY{n}{unit} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{unit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{condition}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{value}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.04}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  월\textasciitilde{}일 모두 오후에 trip duration이 높아짐
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{summary\PYZus{}weekday\PYZus{}duration} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{summary\PYZus{}weekday\PYZus{}duration}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{summary\PYZus{}weekday\PYZus{}duration}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{unit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{tsplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{summary\PYZus{}weekday\PYZus{}duration}\PY{p}{,} \PY{n}{time}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                    \PY{n}{unit} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{unit}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{condition}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{value}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.04}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  6월이 될수록 trip duration이 높아짐
+\end{itemize}
+
+    \hypertarget{working_day-uxc5ecuxbd80uxc5d0-uxb530uxb978-pickup_month}{%
+\subsubsection{working\_day 여부에 따른
+pickup\_month}\label{working_day-uxc5ecuxbd80uxc5d0-uxb530uxb978-pickup_month}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{wd} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{wd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{log1p}\PY{p}{(}\PY{n}{wd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{wd}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{husl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{split}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pickups Month \PYZam{} Log of Trip Duration (considering working day)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pickup Month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Log of Trip Duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  업무일에 trip\_duration이 조금 높아짐
+\end{itemize}
+
+    \hypertarget{working_day-uxc5ecuxbd80uxc5d0-uxb530uxb978-pickup_hour}{%
+\subsubsection{working\_day 여부에 따른
+pickup\_hour}\label{working_day-uxc5ecuxbd80uxc5d0-uxb530uxb978-pickup_hour}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{wd} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{wd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{log1p}\PY{p}{(}\PY{n}{wd}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{wd}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{husl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{split}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pickups Hours \PYZam{} Log of Trip Duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pickup Hours}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Log of Trip Duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_67_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  업무일에 trip\_duration이 높은 경향을 보임
+\end{itemize}
+
+    \hypertarget{uxbcc0uxc218uxac04-uxc0c1uxad00uxad00uxacc4-heatmap}{%
+\subsubsection{2-2. 변수간 상관관계
+heatmap}\label{uxbcc0uxc218uxac04-uxc0c1uxad00uxad00uxacc4-heatmap}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{col\PYZus{}reals} \PY{o}{=} \PY{n}{col\PYZus{}real} \PY{o}{+} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{corr\PYZus{}matt} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{col\PYZus{}reals}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{corr\PYZus{}matt}\PY{p}{)}
+         \PY{n}{mask}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{tril\PYZus{}indices\PYZus{}from}\PY{p}{(}\PY{n}{mask}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{k+kc}{False}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corr\PYZus{}matt}\PY{p}{,} \PY{n}{mask}\PY{o}{=}\PY{n}{mask}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RdPu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  위치 변수들을 제외하고는 변수간, 종속변수와도 상관관계가 낮음
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{train\PYZus{}log} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{col\PYZus{}reals}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{train\PYZus{}log}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log1p}\PY{p}{(}\PY{n}{train\PYZus{}log}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{corr\PYZus{}matt\PYZus{}log} \PY{o}{=} \PY{n}{train\PYZus{}log}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{corr\PYZus{}matt}\PY{p}{)}
+         \PY{n}{mask}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{tril\PYZus{}indices\PYZus{}from}\PY{p}{(}\PY{n}{mask}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{k+kc}{False}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corr\PYZus{}matt\PYZus{}log}\PY{p}{,} \PY{n}{mask}\PY{o}{=}\PY{n}{mask}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RdPu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_72_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  종속변수에 로그를 취할 경우 distance와의 상관관계가 0.5를 넘음
+\end{itemize}
+
+    \hypertarget{modeling}{%
+\subsection{2. Modeling}\label{modeling}}
+
+    \hypertarget{rough-modeling}{%
+\subsubsection{2-1. Rough Modeling}\label{rough-modeling}}
+
+\begin{itemize}
+\tightlist
+\item
+  변수 중요도 파악 (F-검정)
+\end{itemize}
+
+    \hypertarget{uxc804uxccb4-uxbcc0uxc218-f-uxac80uxc815}{%
+\subsubsection{전체 변수
+F-검정}\label{uxc804uxccb4-uxbcc0uxc218-f-uxac80uxc815}}
+
+    \begin{itemize}
+\tightlist
+\item
+  모든 변수를 사용한 OLS
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{model} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{o}{.}\PY{n}{from\PYZus{}formula}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration \PYZti{} passenger\PYZus{}count + distance + bearing + pickup\PYZus{}month +}\PY{l+s+s2}{\PYZdq{}} 
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday + pickup\PYZus{}hour + pickup\PYZus{}latitude + pickup\PYZus{}longitude +}\PY{l+s+s2}{\PYZdq{}}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}latitude + dropoff\PYZus{}longitude + vendor\PYZus{}id + store\PYZus{}and\PYZus{}fwd\PYZus{}flag}\PY{l+s+s2}{\PYZdq{}}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{train}\PY{p}{)}
+         \PY{n}{result} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R\PYZhy{}squared of a model:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{result}\PY{o}{.}\PY{n}{rsquared}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Adjusted R\PYZhy{}squared of a model:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{result}\PY{o}{.}\PY{n}{rsquared\PYZus{}adj}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+R-squared of a model: 0.0250067420715
+Adjusted R-squared of a model: 0.0249980524469
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{sm}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{anova\PYZus{}lm}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{n}{typ}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:}                           sum\_sq         df             F        PR(>F)
+         passenger\_count     1.783458e+08        1.0     18.187649  2.001854e-05
+         distance            2.832853e+11        1.0  28889.350234  0.000000e+00
+         bearing             1.281384e+09        1.0    130.675126  2.925019e-30
+         pickup\_month        1.867088e+09        1.0    190.405067  2.610001e-43
+         pickup\_weekday      9.550070e+08        1.0     97.391338  5.698883e-23
+         pickup\_hour         9.399008e+08        1.0     95.850804  1.240750e-22
+         pickup\_latitude     1.549360e+09        1.0    158.003282  3.103169e-36
+         pickup\_longitude    9.922646e+08        1.0    101.190849  8.368396e-24
+         dropoff\_latitude    3.850458e+08        1.0     39.266853  3.697664e-10
+         dropoff\_longitude   1.773337e+09        1.0    180.844437  3.187930e-41
+         vendor\_id           1.527002e+10        1.0   1557.231973  0.000000e+00
+         store\_and\_fwd\_flag  3.687686e+07        1.0      3.760691  5.247109e-02
+         working\_day         2.211028e+09        1.0    225.480034  5.820108e-51
+         Residual            1.430310e+13  1458626.0           NaN           NaN
+\end{Verbatim}
+            
+    \hypertarget{uxacb0uxacfc}{%
+\paragraph{{[}결과{]}}\label{uxacb0uxacfc}}
+
+\begin{itemize}
+\tightlist
+\item
+  \(R^2\)와 \(Adj. R^2\) 모두 매우 낮음
+\item
+  모든 변수들의 p-value가 0에 가까움
+\end{itemize}
+
+    \hypertarget{uxb2e4uxc911uxacf5uxc120uxc131-uxd655uxc778---vif}{%
+\subsubsection{다중공선성 확인 -
+VIF}\label{uxb2e4uxc911uxacf5uxc120uxc131-uxd655uxc778---vif}}
+
+\begin{itemize}
+\tightlist
+\item
+  실수 변수에 시간 변수를 포함해 VIF 확인
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{col\PYZus{}reals} \PY{o}{=} \PY{n}{col\PYZus{}real} \PY{o}{+} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{train\PYZus{}reals} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{col\PYZus{}reals}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{outliers\PYZus{}influence} \PY{k}{import} \PY{n}{variance\PYZus{}inflation\PYZus{}factor}
+         
+         \PY{n}{vif} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         \PY{n}{vif}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{VIF Factor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{variance\PYZus{}inflation\PYZus{}factor}\PY{p}{(}\PY{n}{train\PYZus{}reals}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{train\PYZus{}reals}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{n}{vif}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{features}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{train\PYZus{}reals}\PY{o}{.}\PY{n}{columns}
+         \PY{n}{vif}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:}      VIF Factor           features
+         0  2.606389e+00    passenger\_count
+         1  1.714432e+00           distance
+         2  4.411227e+00            bearing
+         3  3.819283e+06   pickup\_longitude
+         4  1.815546e+06    pickup\_latitude
+         5  3.590577e+06  dropoff\_longitude
+         6  1.596762e+06   dropoff\_latitude
+         7  5.578639e+00        pickup\_hour
+         8  3.468773e+00     pickup\_weekday
+         9  5.379493e+00       pickup\_month
+\end{Verbatim}
+            
+    \textbf{{[}VIF 결과{]}} - \textbf{위치 변수들의 VIF가 높게 나옴}
+
+    \hypertarget{uxce74uxd14cuxace0uxb9ac-uxbcc0uxc218-uxc601uxd5a5uxb3c4-uxd30cuxc545t-uxac80uxc815-f-uxac80uxc815}{%
+\subsubsection{카테고리 변수 영향도 파악(t-검정,
+F-검정)}\label{uxce74uxd14cuxace0uxb9ac-uxbcc0uxc218-uxc601uxd5a5uxb3c4-uxd30cuxc545t-uxac80uxc815-f-uxac80uxc815}}
+
+\begin{itemize}
+\tightlist
+\item
+  vendor\_id
+\item
+  store\_and\_fwd\_flag
+\item
+  working\_day
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{model\PYZus{}vd} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{o}{.}\PY{n}{from\PYZus{}formula}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration \PYZti{} C(vendor\PYZus{}id) + 0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{)}
+         \PY{n}{sm}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{anova\PYZus{}lm}\PY{p}{(}\PY{n}{model\PYZus{}vd}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}                      df        sum\_sq       mean\_sq             F  PR(>F)
+         C(vendor\_id)        2.0  1.343028e+12  6.715140e+11  66854.509205     0.0
+         Residual      1458638.0  1.465116e+13  1.004441e+07           NaN     NaN
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{model\PYZus{}wd} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{o}{.}\PY{n}{from\PYZus{}formula}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration \PYZti{} C(working\PYZus{}day) + 0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{)}
+         \PY{n}{sm}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{anova\PYZus{}lm}\PY{p}{(}\PY{n}{model\PYZus{}wd}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:}                        df        sum\_sq       mean\_sq             F  PR(>F)
+         C(working\_day)        2.0  1.325165e+12  6.625827e+11  65885.002894     0.0
+         Residual        1458638.0  1.466902e+13  1.005665e+07           NaN     NaN
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{model\PYZus{}flag} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{o}{.}\PY{n}{from\PYZus{}formula}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration \PYZti{} C(store\PYZus{}and\PYZus{}fwd\PYZus{}flag) + 0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{)}
+         \PY{n}{sm}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{anova\PYZus{}lm}\PY{p}{(}\PY{n}{model\PYZus{}flag}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:}                               df        sum\_sq       mean\_sq             F  \textbackslash{}
+         C(store\_and\_fwd\_flag)        2.0  1.324369e+12  6.621844e+11  65841.818747   
+         Residual               1458638.0  1.466982e+13  1.005720e+07           NaN   
+         
+                                PR(>F)  
+         C(store\_and\_fwd\_flag)     0.0  
+         Residual                  NaN  
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  세 변수의 P-value 모두 0
+\end{itemize}
+
+    \hypertarget{one-way-anova}{%
+\subsubsection{One-Way ANOVA}\label{one-way-anova}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{working\PYZus{}day}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} F\_onewayResult(statistic=92.38540001309029, pvalue=7.1445130281704058e-22)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}and\PYZus{}fwd\PYZus{}flag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{store\PYZus{}and\PYZus{}fwd\PYZus{}flag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} F\_onewayResult(statistic=13.167956950284623, pvalue=0.00028478677314214095)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{f\PYZus{}oneway}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vendor\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} 
+                           \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vendor\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} F\_onewayResult(statistic=1870.8577293916605, pvalue=0.0)
+\end{Verbatim}
+            
+    \hypertarget{uxcc28-modeling-trial-error}{%
+\subsubsection{2-2. 1차 Modeling trial \&
+error}\label{uxcc28-modeling-trial-error}}
+
+\begin{itemize}
+\tightlist
+\item
+  Outlier 제거 없이 modeling 시도
+\end{itemize}
+
+    OLS 시도 과정 보여주기
+
+    \hypertarget{uxcc28-modeling}{%
+\subsubsection{2-3. 2차 Modeling}\label{uxcc28-modeling}}
+
+\begin{itemize}
+\tightlist
+\item
+  Outlier 수동 제거
+
+  \begin{itemize}
+  \tightlist
+  \item
+    시작 전 데이터의 경향으로부터 너무 벗어났다고 판단된 outlier 제거
+    (입력 오류로 보이는 데이터)
+  \item
+    trip\_duration 80000 (22시간) 이상
+  \item
+    뉴욕 경계를 매우 벗어난 위치 데이터
+  \end{itemize}
+\item
+  변수 선택
+
+  \begin{itemize}
+  \tightlist
+  \item
+    VIF가 높은 위치 데이터는 pickup\_longitude만 선택
+  \item
+    실수 변수: distance, bearing, pickup\_month, pickup\_weekday,
+    pickup\_hour, pickup\_longitude
+  \item
+    카테고리 변수: vendor\_id
+  \end{itemize}
+\item
+  변수 변환
+
+  \begin{itemize}
+  \tightlist
+  \item
+    모든 변수 scale
+  \item
+    trip\_duration과 distance log변환
+  \item
+    pickup\_hour, pickup\_weekday 다항회귀
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{80000}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{45}\PY{p}{]}
+         \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{36}\PY{p}{]}
+         \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dropoff\PYZus{}latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{o}{\PYZhy{}}\PY{l+m+mi}{120}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{uxcc28-modeling-1}{%
+\subsubsection{2차 Modeling 1}\label{uxcc28-modeling-1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{model} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{o}{.}\PY{n}{from\PYZus{}formula}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scale(np.log1p(trip\PYZus{}duration)) \PYZti{} scale(np.log1p(distance)) + scale(bearing)}\PY{l+s+s2}{\PYZdq{}}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ scale(pickup\PYZus{}month) + scale(pickup\PYZus{}weekday) + scale(pickup\PYZus{}hour)}\PY{l+s+s2}{\PYZdq{}}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ scale(pickup\PYZus{}longitude) + scale(dropoff\PYZus{}longitude) + C(vendor\PYZus{}id)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{train}\PY{p}{)}
+         \PY{n}{result\PYZus{}01} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{result\PYZus{}01}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                  OLS Regression Results                                  
+==========================================================================================
+Dep. Variable:     scale(np.log1p(trip\_duration))   R-squared:                       0.612
+Model:                                        OLS   Adj. R-squared:                  0.612
+Method:                             Least Squares   F-statistic:                 2.868e+05
+Date:                            Wed, 14 Mar 2018   Prob (F-statistic):               0.00
+Time:                                    19:54:41   Log-Likelihood:            -1.3781e+06
+No. Observations:                         1456739   AIC:                         2.756e+06
+Df Residuals:                             1456730   BIC:                         2.756e+06
+Df Model:                                       8                                         
+Covariance Type:                        nonrobust                                         
+=============================================================================================
+                                coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------------
+Intercept                    -0.0081      0.001    -10.646      0.000      -0.010      -0.007
+C(vendor\_id)[T.2]             0.0151      0.001     14.563      0.000       0.013       0.017
+scale(np.log1p(distance))     0.8146      0.001   1460.641      0.000       0.814       0.816
+scale(bearing)                0.0885      0.001    150.851      0.000       0.087       0.090
+scale(pickup\_month)           0.0322      0.001     62.426      0.000       0.031       0.033
+scale(pickup\_weekday)        -0.0424      0.001    -81.844      0.000      -0.043      -0.041
+scale(pickup\_hour)            0.0509      0.001     98.067      0.000       0.050       0.052
+scale(pickup\_longitude)      -0.1090      0.001   -167.389      0.000      -0.110      -0.108
+scale(dropoff\_longitude)     -0.0228      0.001    -37.280      0.000      -0.024      -0.022
+==============================================================================
+Omnibus:                   385455.765   Durbin-Watson:                   1.999
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         32852376.307
+Skew:                          -0.208   Prob(JB):                         0.00
+Kurtosis:                      26.261   Cond. No.                         3.02
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+    \end{Verbatim}
+
+    \hypertarget{uxacb0uxacfc-uxc9c4uxb2e8}{%
+\subsubsection{{[}결과 진단{]}}\label{uxacb0uxacfc-uxc9c4uxb2e8}}
+
+    \hypertarget{uxc794uxcc28-uxc815uxaddcuxc131-uxac80uxd1a0}{%
+\subsubsection{잔차 정규성
+검토}\label{uxc794uxcc28-uxc815uxaddcuxc131-uxac80uxd1a0}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{probplot}\PY{p}{(}\PY{n}{result\PYZus{}01}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{n}{plt}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{norm\PYZus{}test} \PY{o}{=} \PY{n}{sms}\PY{o}{.}\PY{n}{omni\PYZus{}normtest}\PY{p}{(}\PY{n}{result\PYZus{}01}\PY{o}{.}\PY{n}{resid}\PY{p}{)}
+         \PY{k}{for} \PY{n}{xi} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chi\PYZca{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{P\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{norm\PYZus{}test}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}\PYZhy{}12s}\PY{l+s+s2}{: }\PY{l+s+si}{\PYZpc{}6.3f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{xi}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_104_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Chi\^{}2       : 385455.765
+P-value     :  0.000
+
+    \end{Verbatim}
+
+    \hypertarget{uxc544uxc6c3uxb77cuxc774uxc5b4-uxc81cuxac70}{%
+\subsubsection{아웃라이어
+제거}\label{uxc544uxc6c3uxb77cuxc774uxc5b4-uxc81cuxac70}}
+
+\begin{itemize}
+\tightlist
+\item
+  Cook's Distance
+\item
+  Fox' Outlier Recommendation
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{influence} \PY{o}{=} \PY{n}{result\PYZus{}01}\PY{o}{.}\PY{n}{get\PYZus{}influence}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cooks\PYZus{}d2}\PY{p}{,} \PY{n}{pvals} \PY{o}{=} \PY{n}{influence}\PY{o}{.}\PY{n}{cooks\PYZus{}distance}
+         \PY{n}{fox\PYZus{}cr} \PY{o}{=} \PY{l+m+mi}{4} \PY{o}{/} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{9}\PY{p}{)}
+         
+         \PY{n}{idx\PYZus{}cooks} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{cooks\PYZus{}d2} \PY{o}{\PYZgt{}} \PY{n}{fox\PYZus{}cr}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{idx\PYZus{}cooks}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} 57687
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{train\PYZus{}rev01} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{train\PYZus{}rev01}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{idx\PYZus{}cooks}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{train\PYZus{}rev01}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}rev01}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} (1399052, 1456739)
+\end{Verbatim}
+            
+    outlier 그래프 추가?
+
+    \hypertarget{uxcc28-modeling-2}{%
+\subsubsection{2차 Modeling 2}\label{uxcc28-modeling-2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{model} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{o}{.}\PY{n}{from\PYZus{}formula}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{np.log1p(trip\PYZus{}duration) \PYZti{} scale(np.log1p(distance)) + scale(bearing)}\PY{l+s+s2}{\PYZdq{}}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ scale(pickup\PYZus{}month) + scale(pickup\PYZus{}weekday) + scale(I(pickup\PYZus{}weekday**2))}\PY{l+s+s2}{\PYZdq{}}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ scale(I(pickup\PYZus{}hour**2)) + scale(I(pickup\PYZus{}hour**4))}\PY{l+s+s2}{\PYZdq{}}
+                                     \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ scale(pickup\PYZus{}longitude) + C(vendor\PYZus{}id)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{train\PYZus{}rev01}\PY{p}{)}
+         \PY{n}{result\PYZus{}02} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{result\PYZus{}02}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                               OLS Regression Results                              
+===================================================================================
+Dep. Variable:     np.log1p(trip\_duration)   R-squared:                       0.700
+Model:                                 OLS   Adj. R-squared:                  0.700
+Method:                      Least Squares   F-statistic:                 3.634e+05
+Date:                     Wed, 14 Mar 2018   Prob (F-statistic):               0.00
+Time:                             19:56:02   Log-Likelihood:            -6.3620e+05
+No. Observations:                  1399052   AIC:                         1.272e+06
+Df Residuals:                      1399042   BIC:                         1.273e+06
+Df Model:                                9                                         
+Covariance Type:                 nonrobust                                         
+=================================================================================================
+                                    coef    std err          t      P>|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Intercept                         6.4808      0.000   1.37e+04      0.000       6.480       6.482
+C(vendor\_id)[T.2]                 0.0020      0.001      3.098      0.002       0.001       0.003
+scale(np.log1p(distance))         0.6199      0.000   1708.455      0.000       0.619       0.621
+scale(bearing)                    0.0830      0.000    235.899      0.000       0.082       0.084
+scale(pickup\_month)               0.0276      0.000     85.571      0.000       0.027       0.028
+scale(pickup\_weekday)             0.1700      0.001    146.548      0.000       0.168       0.172
+scale(I(pickup\_weekday ** 2))    -0.2096      0.001   -180.671      0.000      -0.212      -0.207
+scale(I(pickup\_hour ** 2))        0.3892      0.001    326.642      0.000       0.387       0.392
+scale(I(pickup\_hour ** 4))       -0.3977      0.001   -333.577      0.000      -0.400      -0.395
+scale(pickup\_longitude)          -0.1106      0.000   -287.055      0.000      -0.111      -0.110
+==============================================================================
+Omnibus:                       13.551   Durbin-Watson:                   2.000
+Prob(Omnibus):                  0.001   Jarque-Bera (JB):               13.608
+Skew:                           0.005   Prob(JB):                      0.00111
+Kurtosis:                       3.011   Cond. No.                         7.47
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+    \end{Verbatim}
+
+    \hypertarget{uxacb0uxacfc-uxc9c4uxb2e8}{%
+\subsubsection{{[}결과 진단{]}}\label{uxacb0uxacfc-uxc9c4uxb2e8}}
+
+    \hypertarget{uxc544uxc6c3uxb77cuxc774uxc5b4-uxc81cuxac70-uxd6c4-uxc794uxcc28-uxc815uxaddcuxc131-uxac80uxd1a0}{%
+\subsubsection{아웃라이어 제거 후 잔차 정규성
+검토}\label{uxc544uxc6c3uxb77cuxc774uxc5b4-uxc81cuxac70-uxd6c4-uxc794uxcc28-uxc815uxaddcuxc131-uxac80uxd1a0}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{probplot}\PY{p}{(}\PY{n}{result\PYZus{}02}\PY{o}{.}\PY{n}{resid}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{n}{plt}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{norm\PYZus{}test} \PY{o}{=} \PY{n}{sms}\PY{o}{.}\PY{n}{omni\PYZus{}normtest}\PY{p}{(}\PY{n}{result\PYZus{}02}\PY{o}{.}\PY{n}{resid}\PY{p}{)}
+         \PY{k}{for} \PY{n}{xi} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chi\PYZca{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{P\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{norm\PYZus{}test}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}\PYZhy{}12s}\PY{l+s+s2}{: }\PY{l+s+si}{\PYZpc{}6.3f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{xi}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_114_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Chi\^{}2       : 13.551
+P-value     :  0.001
+
+    \end{Verbatim}
+
+    \hypertarget{uxcd5cuxc885-uxbaa8uxb378-partial-regression-plot}{%
+\subsubsection{최종 모델 partial regression
+plot}\label{uxcd5cuxc885-uxbaa8uxb378-partial-regression-plot}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sm}\PY{o}{.}\PY{n}{graphics}\PY{o}{.}\PY{n}{plot\PYZus{}partregress\PYZus{}grid}\PY{p}{(}\PY{n}{result\PYZus{}02}\PY{p}{,} \PY{n}{fig}\PY{o}{=}\PY{n}{fig}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_116_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{cross-validation}{%
+\subsubsection{2-4. Cross Validation}\label{cross-validation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}\PY{p}{,} \PY{n}{Ridge}\PY{p}{,} \PY{n}{Lasso}\PY{p}{,} \PY{n}{ElasticNet}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{y}\PY{p}{,} \PY{n}{X} \PY{o}{=} \PY{n}{dmatrices}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{np.log1p(trip\PYZus{}duration) \PYZti{} scale(np.log1p(distance)) + scale(bearing)}\PY{l+s+s2}{\PYZdq{}}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ scale(pickup\PYZus{}month) + scale(pickup\PYZus{}weekday) + scale(I(pickup\PYZus{}weekday**2))}\PY{l+s+s2}{\PYZdq{}}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ scale(I(pickup\PYZus{}hour**2)) + scale(I(pickup\PYZus{}hour**4))}\PY{l+s+s2}{\PYZdq{}}
+                          \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{+ scale(pickup\PYZus{}longitude) + C(vendor\PYZus{}id)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{train\PYZus{}rev01}\PY{p}{,} \PY{n}{return\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dataframe}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{model\PYZus{}lr} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{model\PYZus{}ridge} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{model\PYZus{}lasso} \PY{o}{=} \PY{n}{Lasso}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{model\PYZus{}en} \PY{o}{=} \PY{n}{ElasticNet}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{cross-validation---r2}{%
+\subsubsection{\texorpdfstring{Cross Validation -
+\(R^2\)}{Cross Validation - R\^{}2}}\label{cross-validation---r2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{cv} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ Original Model ]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scores: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}lr}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}lr}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{*}\PY{l+m+mi}{90}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ Ridge ]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scores: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}ridge}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}ridge}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{*}\PY{l+m+mi}{90}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ Lasso ]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scores: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}lasso}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}lasso}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{*}\PY{l+m+mi}{90}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ Elastic Net ]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scores: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}en}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}en}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ Original Model ]
+Scores:  [ 0.69948154  0.69885706  0.69861115  0.69982117  0.70068646  0.70091944
+  0.70119144  0.70115148  0.70144179  0.70190159]
+Mean: 0.700406312038
+------------------------------------------------------------------------------------------
+[ Ridge ]
+Scores:  [ 0.69948154  0.69885707  0.69861114  0.69982118  0.70068645  0.70091947
+  0.70119144  0.70115147  0.70144179  0.70190157]
+Mean: 0.700406312063
+------------------------------------------------------------------------------------------
+[ Lasso ]
+Scores:  [ -1.52998738e-06  -5.13395834e-07  -4.87174723e-08  -2.27738665e-06
+  -2.01910333e-07  -2.18421405e-06  -8.94961718e-08  -3.47773809e-06
+  -2.15630228e-06  -5.04772226e-06]
+Mean: -1.75268705205e-06
+------------------------------------------------------------------------------------------
+[ Elastic Net ]
+Scores:  [ 0.08928113  0.08933285  0.08946128  0.08945922  0.0891907   0.08961461
+  0.0890187   0.08932816  0.08942745  0.08927697]
+Mean: 0.0893391053065
+
+    \end{Verbatim}
+
+    \hypertarget{cross-validation---rmsle-score}{%
+\subsubsection{Cross Validation - RMSLE
+score}\label{cross-validation---rmsle-score}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{make\PYZus{}scorer}
+         
+         \PY{k}{def} \PY{n+nf}{rmsle}\PY{p}{(}\PY{n}{predicted\PYZus{}values}\PY{p}{,} \PY{n}{actual\PYZus{}values}\PY{p}{)}\PY{p}{:}
+             \PY{n}{predicted\PYZus{}values} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{predicted\PYZus{}values}\PY{p}{)}
+             \PY{n}{actual\PYZus{}values} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{actual\PYZus{}values}\PY{p}{)}
+             
+             \PY{n}{log\PYZus{}predict} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{predicted\PYZus{}values} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{log\PYZus{}actual} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{actual\PYZus{}values} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{n}{difference} \PY{o}{=} \PY{n}{log\PYZus{}predict} \PY{o}{\PYZhy{}} \PY{n}{log\PYZus{}actual}
+             \PY{n}{difference} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{difference}\PY{p}{)}
+             
+             \PY{n}{mean\PYZus{}difference} \PY{o}{=} \PY{n}{difference}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+             
+             \PY{n}{score} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{mean\PYZus{}difference}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{score}
+         
+         \PY{n}{rmsle\PYZus{}scorer} \PY{o}{=} \PY{n}{make\PYZus{}scorer}\PY{p}{(}\PY{n}{rmsle}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{cv} \PY{o}{=} \PY{n}{KFold}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ Original Model ]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scores: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}lr}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{n}{rmsle\PYZus{}scorer}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}lr}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{n}{rmsle\PYZus{}scorer}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{*}\PY{l+m+mi}{90}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{[ Ridge ]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Scores: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}ridge}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{n}{rmsle\PYZus{}scorer}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}ridge}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{n}{rmsle\PYZus{}scorer}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{n}{cv}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ Original Model ]
+Scores:  [ 0.05252643  0.05261487  0.05260227  0.05246186  0.05249921  0.05235199
+  0.0525223   0.05241848  0.05237435  0.05231536]
+Mean: 0.0524687117922
+------------------------------------------------------------------------------------------
+[ Ridge ]
+Scores:  [ 0.05252644  0.05261487  0.05260228  0.05246186  0.05249921  0.05235199
+  0.0525223   0.05241848  0.05237436  0.05231536]
+Mean: 0.0524687139465
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} alphas = np.logspace(\PYZhy{}4, \PYZhy{}.5, 50)}
+        
+        \PY{c+c1}{\PYZsh{} scores = list()}
+        
+        \PY{c+c1}{\PYZsh{} for alpha in alphas:}
+        \PY{c+c1}{\PYZsh{}     model\PYZus{}ridge.alpha = alpha}
+        \PY{c+c1}{\PYZsh{}     this\PYZus{}scores = cross\PYZus{}val\PYZus{}score(model\PYZus{}ridge, X, y, scoring=rmsle\PYZus{}scorer, cv=cv)}
+        \PY{c+c1}{\PYZsh{}     scores.append(np.mean(this\PYZus{}scores))}
+        
+        \PY{c+c1}{\PYZsh{} plt.semilogx(alphas, scores)}
+        \PY{c+c1}{\PYZsh{} plt.ylabel(\PYZsq{}CV score\PYZsq{})}
+        \PY{c+c1}{\PYZsh{} plt.xlabel(\PYZsq{}alpha\PYZsq{})}
+        \PY{c+c1}{\PYZsh{} plt.axhline(np.max(scores), linestyle=\PYZsq{}:\PYZsq{})}
+        \PY{c+c1}{\PYZsh{} plt.show()}
+\end{Verbatim}
+
+
+    \hypertarget{uxc815uxaddcuxd654-uxd558uxc774uxd37cuxbaa8uxc218-uxcd5cuxc801uxd654}{%
+\subsubsection{정규화 하이퍼모수
+최적화}\label{uxc815uxaddcuxd654-uxd558uxc774uxd37cuxbaa8uxc218-uxcd5cuxc801uxd654}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{alphas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{logspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+         
+         \PY{n}{scores} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{alpha} \PY{o+ow}{in} \PY{n}{alphas}\PY{p}{:}
+             \PY{n}{model\PYZus{}ridge}\PY{o}{.}\PY{n}{alpha} \PY{o}{=} \PY{n}{alpha}
+             \PY{n}{this\PYZus{}scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{model\PYZus{}ridge}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mean\PYZus{}squared\PYZus{}error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+             \PY{n}{scores}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{this\PYZus{}scores}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{semilogx}\PY{p}{(}\PY{n}{alphas}\PY{p}{,} \PY{n}{scores}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CV score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{scores}\PY{p}{)}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{ridge\PYZus{}cv}\PY{o}{.}\PY{n}{alpha\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_128_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.316227766017
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}month}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{month}
+         \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}weekday}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{weekday}
+         \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}hour}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickup\PYZus{}datetime}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{hour}
+         \PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2} \PY{o}{=} \PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pickup\PYZus{}latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pickup\PYZus{}longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} 
+                                   \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dropoff\PYZus{}latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dropoff\PYZus{}longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+         \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{distance} \PY{o}{=} \PY{n}{haversine\PYZus{}array}\PY{p}{(}\PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{bearing} \PY{o}{=} \PY{n}{bearing\PYZus{}array}\PY{p}{(}\PY{n}{lat1}\PY{p}{,} \PY{n}{lng1}\PY{p}{,} \PY{n}{lat2}\PY{p}{,} \PY{n}{lng2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{pred} \PY{o}{=} \PY{n}{result\PYZus{}02}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{k+kn}{import} \PY{n+nn}{datetime}
+         \PY{n}{now} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}
+         \PY{n}{submission\PYZus{}kaggle} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../../sample\PYZus{}submission.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{submission\PYZus{}kaggle}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trip\PYZus{}duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{expm1}\PY{p}{(}\PY{n}{pred}\PY{p}{)}
+         \PY{n}{submission\PYZus{}kaggle}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../submission\PYZus{}}\PY{l+s+si}{\PYZob{}month\PYZcb{}}\PY{l+s+si}{\PYZob{}day\PYZcb{}}\PY{l+s+s2}{.csv}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{month}\PY{o}{=}\PY{n}{now}\PY{o}{.}\PY{n}{month}\PY{p}{,} \PY{n}{day}\PY{o}{=}\PY{n}{now}\PY{o}{.}\PY{n}{day}\PY{p}{)}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{kaggle-submission}{%
+\subsection{Kaggle Submission}\label{kaggle-submission}}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Approximate ranking: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{상위 }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+m+mi}{799}\PY{o}{/}\PY{l+m+mi}{1257} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Approximate ranking:  상위 63.56\%
+
+    \end{Verbatim}
+
+    \hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
