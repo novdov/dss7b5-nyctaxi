@@ -1,6 +1,6 @@
-Regression Team Project
+## Regression Team Project
 
-###Data Science School 7th Team B-5
+### Data Science School 7th Team B-5
 
 DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 
@@ -9,14 +9,14 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 - Language: Python
 - Regression: OLS (statsmodel), Ridge (scikit-learn)
 
-###Overview
+### Overview
 
 - Subject: New York City Taxi Trip Duration
 - Dataset: 2016 NYC Cab trip record data (by TLC)
 - Objective: Building a model that predicts the duration of each trip in New York City.
 - Evaluation: RMSLE 
 
-###Data fields
+### Data fields
 
 - id - 각 운행별 고유 id
 - vendor_id - 운행별 각 택시 회사의 id
