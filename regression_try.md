@@ -2,7 +2,7 @@
 
 
 
-#####실수 only
+#####실 수 only
 
 1) distance
 2) avg_speed_h
@@ -16,7 +16,7 @@
 8) R + pickup_weekday + pickup_month —> 0.014
 9) R + pickup_hour + pickup+weekday + pickup_month —> 0.014
 
-#####카테고리 only
+##### 카테고리 only
 
 1) pickup_month
 2) pickup_weekday
@@ -25,7 +25,7 @@
 5) store_and_fwd_flag -> 0.000
 6)passenger_count -> 0.000 (trip duration, distance, month, hour),
                      0.001 (weekday)
-#####실수 + 카테고리
+##### 실수 + 카테고리
 
 1) R + pickup_hour —> 0.015
 2) R + pickup_weekday —> 0.015
