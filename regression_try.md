@@ -23,7 +23,7 @@
 3) pickup_hour
 4) vendor_id -> 0.000
 5) store_and_fwd_flag -> 0.000
-6)passenger_count -> 0.000 (trip duration, distance, month, hour),
+6) passenger_count -> 0.000 (trip duration, distance, month, hour),
                      0.001 (weekday)
 ##### 실수 + 카테고리
 
