@@ -70,6 +70,7 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
   - Hyperparameter Tuning (Ridge)
 
 ### 5. Kaggle submission
+<img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/rkaggle_submission_0314_02.png?raw=true">
 
 ### 6. Lesson
 
