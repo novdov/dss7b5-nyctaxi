@@ -88,6 +88,6 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 <img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/kaggle_submission_0415.png?raw=true">
 
 - 3차 Modeling
-    - 시간 변수 카테고리로 반영
-    - weekday/hour interaction
-    - R^2 0.700 ---> 0.725로 상승
+    - 시간 변수 카테고리로 반영
+    - weekday/hour interaction
+    -  R^2 0.700 ---> 0.725로 상승
