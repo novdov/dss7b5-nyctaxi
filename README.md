@@ -1,6 +1,6 @@
 ## Regression Team Project
 
-### Data Science School 7th Team B-5
+### [Data Science School 7th Team B-5](https://github.com/novdov/dss7b5-nyctaxi/blob/master/main/5%ED%8C%80(committer)_B_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.ipynb)
 
 DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 
