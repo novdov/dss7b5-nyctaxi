@@ -86,7 +86,8 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 
 ### 7. Follow-Up (0.50591 --> 0.48977, 769/1257)
 
-```model = sm.OLS.from_formula("scale(np.log1p(trip_duration)) ~ scale(np.log1p(distance)) + scale(bearing)"
+```
+model = sm.OLS.from_formula("scale(np.log1p(trip_duration)) ~ scale(np.log1p(distance)) + scale(bearing)"
                             "+ scale(pickup_month) + scale(pickup_weekday) + scale(pickup_hour)"
                             "+ scale(pickup_longitude) + scale(dropoff_longitude) + C(vendor_id)", train)
 ```
