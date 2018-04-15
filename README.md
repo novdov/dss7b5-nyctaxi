@@ -83,3 +83,11 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
     - 한 번에 전체 데이터를 학습시켜 시간이 걸리는 문제 (batch 등의 활용 아쉬움)
         
 - OLS분석 진행시 과학적인 모델링 방법론의 부재에 대한 아쉬움
+
+### 7. Follow-Up (0.50591 --> 0.48977, 769/1257)
+<img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/kaggle_submission_0415.png?raw=true">
+
+- 3차 Modeling
+  - 시간 변수 카테고리로 반영
+  - weekday/hour interaction
+  - R^2 0.700 ---> 0.725로 상승
