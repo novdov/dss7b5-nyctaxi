@@ -85,6 +85,12 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 - OLS분석 진행시 과학적인 모델링 방법론의 부재에 대한 아쉬움
 
 ### 7. Follow-Up (0.50591 --> 0.48977, 769/1257)
+
+```model = sm.OLS.from_formula("scale(np.log1p(trip_duration)) ~ scale(np.log1p(distance)) + scale(bearing)"
+                            "+ scale(pickup_month) + scale(pickup_weekday) + scale(pickup_hour)"
+                            "+ scale(pickup_longitude) + scale(dropoff_longitude) + C(vendor_id)", train)
+```
+
 <img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/kaggle_submission_0415.png?raw=true">
 
 - 3차 Modeling
