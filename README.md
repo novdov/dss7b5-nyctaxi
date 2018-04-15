@@ -60,6 +60,7 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
     - Normality of residual
     - Removing outlier (by Cook's Distance)
     - Model selection
+<img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/model2.png?raw=true">
 
 ### 4. 결과 진단
 - Cross Validation
@@ -71,3 +72,13 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 ### 5. Kaggle submission
 
 ### 6. Lesson
+
+- feature 개수가 적은 상황에서 주어진 feature의 제한적인 활용으로 모델 성능 개선이 어려웠음
+    - 위/경도 변수로부터 ‘distance’만 유의미하게 활용함
+    - speed 활용한 모델링 실패 (아웃라이어 제거할수록 잔차 정규성 악화)
+    - 시간별 trip duration의 유의미한 변화를 발견했지만 모델에 적극적으로 반영되지 못함
+        - 각 시간 변수의 interaction이 반영되지 않음
+        - 실수변수로 반영했지만, polynomial 특성을 제대로 파악/반영하지 못함
+    - 한 번에 전체 데이터를 학습시켜 시간이 걸리는 문제 (batch 등의 활용 아쉬움)
+        
+- OLS분석 진행시 과학적인 모델링 방법론의 부재에 대한 아쉬움
