@@ -87,9 +87,9 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 ### [7. Follow-Up (0.50591 --> 0.48977, 769/1257)](https://github.com/novdov/dss7b5-nyctaxi/blob/master/main/5%ED%8C%80(committer)_B_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C-followup.ipynb)
 
 ```
-model = sm.OLS.from_formula("scale(np.log1p(trip_duration)) ~ scale(np.log1p(distance)) + scale(bearing)"
-                            "+ scale(pickup_month) + scale(pickup_weekday) + scale(pickup_hour)"
-                            "+ scale(pickup_longitude) + scale(dropoff_longitude) + C(vendor_id)", train)
+model = sm.OLS.from_formula("np.log1p(trip_duration) ~ scale(np.log1p(distance)) + scale(bearing)"
+                            "+ C(pickup_hour):C(pickup_weekday)"
+                            "+ scale(pickup_longitude) + C(vendor_id)", train_rev01)
 ```
 
 <img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/kaggle_submission_0415.png?raw=true">
