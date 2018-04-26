@@ -82,7 +82,7 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
         - 실수변수로 반영했지만, polynomial 특성을 제대로 파악/반영하지 못함
 
 
-<img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/model1_partial.png?raw=true", width=800>
+<img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/model1_partial.png?raw=true">
 
 - OLS분석 진행시 과학적인 모델링 방법론의 부재에 대한 아쉬움
 
