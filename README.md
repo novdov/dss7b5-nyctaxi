@@ -80,8 +80,10 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
     - 시간별 trip duration의 유의미한 변화를 발견했지만 모델에 적극적으로 반영되지 못함
         - 각 시간 변수의 interaction이 반영되지 않음
         - 실수변수로 반영했지만, polynomial 특성을 제대로 파악/반영하지 못함
-    - 한 번에 전체 데이터를 학습시켜 시간이 걸리는 문제 (batch 등의 활용 아쉬움)
-        
+
+
+<img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/model1_partial.png?raw=true", width=800>
+
 - OLS분석 진행시 과학적인 모델링 방법론의 부재에 대한 아쉬움
 
 ### [7. Follow-Up (0.50591 --> 0.48977, 769/1257)](https://github.com/novdov/dss7b5-nyctaxi/blob/master/main/5%ED%8C%80(committer)_B_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C-followup.ipynb)
