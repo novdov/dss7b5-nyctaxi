@@ -65,9 +65,7 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 ### 4. 결과 진단
 - Cross Validation
   - K-Fold Cross Validation
-  - Ridge / Lasso / Elastic Net
-- 정규화 하이퍼 모수 최적화
-  - Hyperparameter Tuning (Ridge)
+  - Ridge
 
 ### 5. Kaggle submission (Score: 0.50591, 808/1257)
 <img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/rkaggle_submission_0314_02.png?raw=true">
