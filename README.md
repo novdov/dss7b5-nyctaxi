@@ -1,20 +1,19 @@
 ## Regression Team Project
 
-### [Data Science School 7th Team B-5](https://github.com/novdov/dss7b5-nyctaxi/blob/master/main/5%ED%8C%80(committer)_B_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.ipynb) (클릭 시 notebook으로 이동)
+### [Data Science School 7th Team B-5 (발표자료)](https://github.com/novdov/dss7b5-nyctaxi/blob/master/main/5%ED%8C%80(committer)_B_%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C.ipynb)
 
 DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 
 출처: [Kaggle Competition - New York City Taxi Trip Duration](https://www.kaggle.com/c/nyc-taxi-trip-duration)
 
-- Language: Python
-- Regression: OLS (statsmodel), Ridge (scikit-learn)
+- 사용 언어: Python
+- 회귀 모델링: OLS (statsmodel), Ridge (scikit-learn)
 
 ### Overview
 
-- Subject: New York City Taxi Trip Duration
-- Dataset: 2016 NYC Cab trip record data (by TLC)
-- Objective: Building a model that predicts the duration of each trip in New York City.
-- Evaluation: RMSLE 
+- 목표: 뉴욕시 택시 운행별 소요 시간 예측 모델 구축
+- 데이터 출처: 2016 NYC Cab trip record data (by TLC)
+- 평가 지표: RMSLE 
 
 ### Data fields
 
@@ -37,15 +36,15 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 ### 1. 데이터 탐색 및 전처리
 - Train/Test Data 탐색
 - 변수 기초 전처리
-  - datetime parsing (to month, weekday, hour)
-  - binarize categorical data
-  - get distance, bearing from coordinates
+  - datetime 파싱 (to month, weekday, hour)
+  - 카테고리 데이터 인코딩
+  - 위/경도로부터 거리와 이동 각도 (bearing) 계산
 
 ### 2. 변수 분석
 - 변수 시각화
-  - Distribution of trip duration (dependent variable)
-  - pairplot / boxplot
-  - weird data from trip duraiton & coordinates
+  - 타겟(Trip Duration)의 분포
+  - 타겟 데이터와 변수간 시각화
+  - 아웃라이어 파악
 - 변수간 상관관계 파악
   - Correlation Coefficient
 - 변수 중요도/영향 파악
@@ -55,12 +54,12 @@ DSS 7B-5 회귀분석 팀프로젝트 - New York City Taxi Trip Duration
 
 ### 3. Modeling (OLS)
 - 1차 modeling
-    - rough modeling
+    - 여러 변수 시도
 - 2차 modeling
-    - Normality of residual
-    - Removing outlier (by Cook's Distance)
-    - Model selection
-<img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/model2.png?raw=true">
+    - 아웃라이어 제거 (Cook's Distance 이용)
+    - 잔차 정규성 확인
+    - 모델 선택
+      <img src="https://github.com/novdov/dss7b5-nyctaxi/blob/master/img/model2.png?raw=true">
 
 ### 4. 결과 진단
 - Cross Validation
@@ -96,4 +95,4 @@ model = sm.OLS.from_formula("np.log1p(trip_duration) ~ scale(np.log1p(distance))
 - 3차 Modeling
     - 시간 변수 카테고리로 반영
     - weekday/hour interaction
-    -  R^2 0.700 ---> 0.725로 상승
+    -  R Squared 0.700 ---> 0.725로 상승
